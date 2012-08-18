@@ -9,18 +9,21 @@
 //----------------------------------------------------------------------------------------------------------------
 /// This class is a definition of a linked list.
 /// it is a generic singly linked that can be used for anything.
+/// NOTE: the item being put into the Linkedlist must implement the comparing operators, < > == ...
 //----------------------------------------------------------------------------------------------------------------
 template<typename T>
 class LinkedList
 {
 public:
     //----------------------------------------------------------------------------------------------------------------
-    /// constructor
+    /// @constructor
+    /// initializes list to empty
     //----------------------------------------------------------------------------------------------------------------
     LinkedList();
 
     //----------------------------------------------------------------------------------------------------------------
     /// destructor
+    /// deletes list and frees all memory
     //----------------------------------------------------------------------------------------------------------------
     ~LinkedList();
 
@@ -56,7 +59,7 @@ public:
     /// @return
     /// returns true if there is a next item, false otherwise
     //----------------------------------------------------------------------------------------------------------------
-    bool next();
+    bool next(T& item);
 
 private:
     struct node
@@ -71,6 +74,7 @@ private:
     // points to current element for the iterator
     node* current;
 
+    // number of elements in the list
     int32_t size;
 
 

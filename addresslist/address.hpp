@@ -26,8 +26,10 @@ public:
     /// the type of the field to add
     /// @param value
     /// the value of the field
+    /// @return
+    // returns true if deleted, false otherwise
     //----------------------------------------------------------------------------------------------------------------
-    void rmField(fieldtype type, string value);
+    bool rmField(fieldtype type, string value);
 
     //----------------------------------------------------------------------------------------------------------------
     /// @brief

@@ -43,22 +43,16 @@ public:
     //----------------------------------------------------------------------------------------------------------------
     /// @brief
     /// edits the specified address
-    /// @param firstname
-    /// firstname for address
-    /// @param lastname
-    /// lastname for address
+    /// firstname and lastname is asked from user through standard input
     //----------------------------------------------------------------------------------------------------------------
-    void editAddress(string firstname, string lastname);
+    void editAddress();
 
     //----------------------------------------------------------------------------------------------------------------
     /// @brief
     /// deletes the specified address
-    /// @param firstname
-    /// firstname for address
-    /// @param lastname
-    /// lastname for address
+    /// firstname and lastname is asked from user through standard input
     //----------------------------------------------------------------------------------------------------------------
-    void delAddress(string firstname, string lastname);
+    void delAddress();
 
     //----------------------------------------------------------------------------------------------------------------
     /// @brief

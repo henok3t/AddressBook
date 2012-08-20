@@ -109,6 +109,11 @@ void AddressList::addAddress()
 //----------------------------------------------------------------------------------------------------------------
 void AddressList::editAddress(string firstname, string lastname)
 {
+    string firstname, lastname;
+    cout<<"Please enter first name: ";
+    cin>>firstname;
+    cout<<"Please enter last name: ";
+    cin>>lastname;
     Address Addr;
     addressbook.reset();
     bool found = false;
@@ -170,8 +175,13 @@ void AddressList::editAddress(string firstname, string lastname)
 //----------------------------------------------------------------------------------------------------------------
 /// delAddress
 //----------------------------------------------------------------------------------------------------------------
-void AddressList::delAddress(string firstname, string lastname)
+void AddressList::delAddress()
 {
+    string firstname, lastname;
+    cout<<"Please enter first name: ";
+    cin>>firstname;
+    cout<<"Please enter last name: ";
+    cin>>lastname;
     Address Addr;
     addressbook.reset();
     bool found = false;

@@ -1,4 +1,7 @@
 #include "address.hpp"
+#include <iostream>
+
+using namespace std;
 
 
 //----------------------------------------------------------------------------------------------------------------
@@ -59,4 +62,36 @@ bool Address::find(Field* fld, fieldtype type)
     }
 
     return rc;
+}
+
+//----------------------------------------------------------------------------------------------------------------
+/// printA
+//----------------------------------------------------------------------------------------------------------------
+void Address::printB()
+{
+    Field fld;
+    cout<<endl<<"Dear ";
+    this->find(&fld, FIRSTNAME);
+    cout<<fld.info<<" ";
+    this->find(&fld, LASTNAME);
+    cout<<fld.info<<","<<endl<<endl;
+    cout<<"Hope your Birthday is really Wonderful and this coming year is the best yet!"<<endl;
+    cout<<endl<<"Love, "<<endl<<endl<<"Henok "<<endl;
+}
+
+
+
+//----------------------------------------------------------------------------------------------------------------
+/// printB
+//----------------------------------------------------------------------------------------------------------------
+void Address::printA()
+{
+    Field fld;
+    cout<<endl<<"Dear ";
+    this->find(&fld, FIRSTNAME);
+    cout<<fld.info<<" ";
+    this->find(&fld, LASTNAME);
+    cout<<fld.info<<","<<endl<<endl;
+    cout<<"Hope your Annivarsary is really Wonderful and this coming year is the best yet!"<<endl;
+    cout<<endl<<"Love, "<<endl<<endl<<"Henok "<<endl;
 }

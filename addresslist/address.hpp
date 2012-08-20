@@ -36,9 +36,19 @@ public:
     /// @param value
     /// the value of the field
     /// @return
-    // returns true if deleted, false otherwise
+    /// returns true if deleted, false otherwise
     //----------------------------------------------------------------------------------------------------------------
     bool rmField(fieldtype type, string value);
+
+    //----------------------------------------------------------------------------------------------------------------
+    /// @brief
+    /// finds the first occurance of the field
+    /// @param type
+    /// the type of the field to find
+    /// @return
+    /// returns true if found, false otherwise
+    //----------------------------------------------------------------------------------------------------------------
+    bool find(Field* fld, fieldtype type);
 
     //----------------------------------------------------------------------------------------------------------------
     /// @brief
@@ -60,6 +70,7 @@ private:
 
     LinkedList<Field> fields;
 
+    friend class AddressList;
 };
 
 #endif // ADDRESS_HPP

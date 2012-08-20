@@ -32,8 +32,31 @@ void Address::addField(fieldtype type, string value)
 //----------------------------------------------------------------------------------------------------------------
 bool Address::rmField(fieldtype type, string value)
 {
-   Field temp;
-   temp.type = type;
-   temp.info = value;
-   fields.del(temp);
+    Field temp;
+    temp.type = type;
+    temp.info = value;
+    fields.del(temp);
+}
+
+//----------------------------------------------------------------------------------------------------------------
+/// find
+//----------------------------------------------------------------------------------------------------------------
+bool Address::find(Field* fld, fieldtype type)
+{
+    //return value
+    bool rc;
+
+    Field tmp;
+    fields.reset();
+    while( fields.next(tmp) == true)
+    {
+        if(tmp.type == type)
+        {
+            rc = true;
+            fld = &tmp;
+            break;
+        }
+    }
+
+    return rc;
 }

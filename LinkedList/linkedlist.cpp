@@ -104,7 +104,7 @@ void LinkedList<T>::reset()
 /// next
 //----------------------------------------------------------------------------------------------------------------
 template<typename T>
-bool LinkedList<T>::next(T &item)
+bool LinkedList<T>::next(T& item)
 {
     item = current->data;
     if(current->next != NULL)
@@ -119,7 +119,7 @@ bool LinkedList<T>::next(T &item)
 /// del
 //----------------------------------------------------------------------------------------------------------------
 template<typename T>
-void LinkedList<T>::del(T &item)
+void LinkedList<T>::del(T& item)
 {
     // return value
     bool rc = false;

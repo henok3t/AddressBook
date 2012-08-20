@@ -1,0 +1,19 @@
+Folder Linked List:
+	contains code for linked list header file and implementation.
+Folder address
+	contains code for Address header file and implementation.
+Folder addresslist
+	contains code for addresslist header file and implementation.
+main.cpp
+	code that contain main
+Makefile
+	code that controls the dependencies of the program
+	to compile program, just type make
+Test
+	shows how code is tested
+addressbook
+	compiled executable
+
+My exprience with coding linked list enhance my knowledge of pointers and understanding of the linkedlist datastructure. It was great to have been coding with linked list. 
+
+Thank you

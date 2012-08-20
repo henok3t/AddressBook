@@ -18,6 +18,7 @@ int main(void)
     AddressList addresses;
     int choice;
     printMenu();
+    cin>>choice;
     while(choice != 6)
     {
         switch (choice)
@@ -35,14 +36,14 @@ int main(void)
             addresses.genBcards();
             break;
         case 5:
-            addresses.getAcards();
+            addresses.genAcards();
             break;
         default:
             cout<<"invalid input";
-            printMenu();
-            cin>>choice;
             break;
         }
+        printMenu();
+        cin>>choice;
     }
 }
 

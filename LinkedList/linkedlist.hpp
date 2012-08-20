@@ -92,4 +92,6 @@ private:
 
 };
 
+#include "linkedlist.cpp"
+
 #endif // LINKEDLIST_H

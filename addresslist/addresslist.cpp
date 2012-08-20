@@ -3,7 +3,11 @@
 #include <ctype.h>
 #include <iostream>
 #include <string>
-#include <time.h>
+#include <stdio.h>
+#include <ctime>
+#include <limits.h>
+
+void getDate(string& dt);
 
 using namespace std;
 
@@ -40,66 +44,59 @@ void AddressList::addAddress()
     // get first name
     cout<<"Please enter first name: ";
     cin>>temp;
-    Address.addField(Address::FIRSTNAME, temp);
+    newadd->addField(Address::FIRSTNAME, temp);
 
     // get last name
     cout<<"Please enter last name: ";
     cin>>temp;
-    Address.addField(Address::LASTNAME, temp);
-
-    while(true)
+    newadd->addField(Address::LASTNAME, temp);
+    int choice;
+    cout<<"Please choose one of the following options (q to quit)."<<endl;
+    cout<<"Enter Address -- 1"<<endl<<"Enter email -- 2"<<endl;
+    cout<<"Enter Phone -- 3"<<endl<<"Enter Birthday -- 4"<<endl;
+    cout<<"Enter Aniversary Date -- 5 "<<endl;
+    cin>>choice;
+    switch (choice + 1) // skip first and last name
     {
-        char choice;
-        cout<<"Please choose one of the following options (q to quit)."<<endl;
-        cout<<"Enter Address -- 1"<<endl<<"Enter email -- 2"<<endl;
-        cout<<"Enter Phone -- 3"<<endl<<"Enter Birthday -- 4"<<endl;
-        cout<<"Enter Aniversary Date -- 5 "<<endl;
-        cin>>choice;
-        if(choice == 'q')
+    case Address::ADDRESS:
+        cout<<"Please enter address: "<<endl;
+        cin>>temp;
+        newadd->addField(Address::ADDRESS, temp);
+        break;
+    case Address::EMAIL:
+        cout<<"Please enter email: ";
+        cin>>temp;
+        newadd->addField(Address::EMAIL, temp);
+        break;
+    case Address::PHONE:
+        cout<<"Please enter phone number: ";
+        cin>>temp;
+        newadd->addField(Address::PHONE, temp);
+        break;
+    case Address::BIRTHDAY:
+        cout<<"Please enter Birthday (mm/dd/yyyy): ";
+        cin>>temp;
+        if(checkDay(temp))
         {
-            break;
+            newadd->addField(Address::BIRTHDAY, temp);
         }
-        int ichoice = int(choice) - 48; // convert to integer
-        switch (ichoice + 1) // skip first and last name
+        else
         {
-        case Address::ADDRESS:
-            cout<<"Please enter address: "<<endl;
-            getline(cin, temp);
-            Address.addField(Address::ADDRESS, temp);
-            break;
-        case Address::EMAIL:
-            cout<<"Please enter email: ";
-            getline(cin, temp);
-            Address.addField(Address::EMAIL, temp);
-            break;
-        case Address::PHONE:
-            cout<<"Please enter phone number: ";
-            getline(cin, temp);
-            Address.addField(Address::PHONE, temp);
-            break;
-        case Address::BIRTHDAY:
-            cout<<"Please enter Birthday (mm/dd/yy): ";
-            getline(cin, temp);
-            if(checkDay(temp))
-            {
-                Address.addField(Address::BIRTHDAY, temp);
-            }
-            else
-            {
-                cout<<"Wrong Date Format"<<endl;
-            }
-        case Address::ANNIVERSARY:
-            cout<<"Please enter Anniversary date (mm/dd/yyyy): ";
-            getline(cin, temp);
-            if(checkDay(temp))
-            {
-                Address.addField(Address::ANNIVERSARY, temp);
-            }
-            else
-            {
-                cout<<"Wrong Date Format"<<endl;
-            }
+            cout<<"Wrong Date Format"<<endl;
         }
+        break;
+    case Address::ANNIVERSARY:
+        cout<<"Please enter Anniversary date (mm/dd/yyyy): ";
+        cin>>temp;
+        if(checkDay(temp))
+        {
+            newadd->addField(Address::ANNIVERSARY, temp);
+        }
+        else
+        {
+            cout<<"Wrong Date Format"<<endl;
+        }
+        break;
     }
 
 }
@@ -107,7 +104,7 @@ void AddressList::addAddress()
 //----------------------------------------------------------------------------------------------------------------
 /// editAddress
 //----------------------------------------------------------------------------------------------------------------
-void AddressList::editAddress(string firstname, string lastname)
+void AddressList::editAddress()
 {
     string firstname, lastname;
     cout<<"Please enter first name: ";
@@ -144,7 +141,7 @@ void AddressList::editAddress(string firstname, string lastname)
         cin>>choice;
 
         Address::Field fld;
-        if( Addr.find(&fld, choice + 1) )
+        if( Addr.find(&fld, Address::fieldtype(choice+1)) )
         {
             string input;
             cout<<"Please enter value of field: ";
@@ -224,9 +221,8 @@ void AddressList::delAddress()
 //----------------------------------------------------------------------------------------------------------------
 void AddressList::genBcards()
 {
-    char date[9];
-    _strdate(date);
-    string sdate = date;
+    string sdate;
+    getDate(sdate);
     Address Addr;
     while(addressbook.next(Addr) == true)
     {
@@ -247,9 +243,8 @@ void AddressList::genBcards()
 //----------------------------------------------------------------------------------------------------------------
 void AddressList::genAcards()
 {
-    char date[9];
-    _strdate(date);
-    string sdate = date;
+    string sdate;
+    getDate(sdate);
     Address Addr;
     while(addressbook.next(Addr) == true)
     {
@@ -272,7 +267,7 @@ bool checkDay(string date)
     //return value
     bool rv = true;
 
-    for(int i=0; i<8; ++i)
+    for(int i=0; i<10; ++i)
     {
         if( (i != 2) && (i != 5) )
         {
@@ -293,4 +288,43 @@ bool checkDay(string date)
     }
 
     return rv;
+}
+
+void getDate(string& dt)
+{
+    time_t tsec;
+
+    struct tm* date;
+
+    tsec = time(NULL);
+
+    date= localtime(&tsec);
+
+    char pls[11];
+    if(date->tm_mday < 10)
+    {
+        pls[0] = '0';
+        sprintf(&pls[1], "%d", date->tm_mday);
+    }
+    else
+    {
+        sprintf(&pls[0], "%d", date->tm_mday);
+    }
+
+    pls[2] = '/';
+    if((date->tm_mon+1) < 10)
+    {
+        pls[3] = '0';
+        sprintf(&pls[4], "%d", date->tm_mon + 1);
+    }
+    else
+    {
+        sprintf(&pls[3], "%d", date->tm_mon + 1);
+    }
+    pls[5] = '/';
+
+    sprintf(&pls[6], "%d", date->tm_year+1900);
+    pls[10] = '\0';
+
+    dt = pls;
 }

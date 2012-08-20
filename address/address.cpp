@@ -65,6 +65,62 @@ bool Address::find(Field* fld, fieldtype type)
 }
 
 //----------------------------------------------------------------------------------------------------------------
+/// operator >
+//----------------------------------------------------------------------------------------------------------------
+bool Address::operator >(Address addr)
+{
+    //return value
+    bool rv = false;
+
+    Field fld1, fld2;
+
+    this->find(&fld1, FIRSTNAME);
+    addr.find(&fld2, FIRSTNAME);
+    if(fld1 > fld2)
+    {
+        rv = true;
+    }
+    else if(fld1 == fld2)
+    {
+        this->find(&fld1, LASTNAME);
+        addr.find(&fld2, LASTNAME);
+        if(fld1 > fld2)
+        {
+            rv = true;
+        }
+    }
+
+    return rv;
+
+}
+
+//----------------------------------------------------------------------------------------------------------------
+/// operator ==
+//----------------------------------------------------------------------------------------------------------------
+bool Address::operator ==(Address addr)
+{
+    //return value
+    bool rv = false;
+
+    Field fld1, fld2;
+
+    this->find(&fld1, FIRSTNAME);
+    addr.find(&fld2, FIRSTNAME);
+    if(fld1 == fld2)
+    {
+        this->find(&fld1, LASTNAME);
+        addr.find(&fld2, LASTNAME);
+        if(fld1 == fld2)
+        {
+            rv = true;
+        }
+    }
+
+    return rv;
+
+}
+
+//----------------------------------------------------------------------------------------------------------------
 /// printA
 //----------------------------------------------------------------------------------------------------------------
 void Address::printB()

@@ -1,5 +1,9 @@
+#ifndef LINKEDLIST_CPP
+#define LINKEDLIST_CPP
+
 #include "linkedlist.hpp"
 #include <stdint.h>
+#include <cstddef>
 
 //----------------------------------------------------------------------------------------------------------------
 // this is the definition of the LinkedListClass
@@ -119,7 +123,7 @@ bool LinkedList<T>::next(T& item)
 /// del
 //----------------------------------------------------------------------------------------------------------------
 template<typename T>
-void LinkedList<T>::del(T& item)
+bool LinkedList<T>::del(T& item)
 {
     // return value
     bool rc = false;
@@ -143,5 +147,7 @@ void LinkedList<T>::del(T& item)
         }
         prev = curr;
     }
-   return rc;s
+   return rc;
 }
+
+#endif
